@@ -45,17 +45,37 @@ public class ConsoleHelper {
             nums = string.split(" ");
 
             if (nums.length == 2) {
-                    try {
-                        if (Integer.parseInt(nums[0]) <= 0 || Integer.parseInt(nums[1]) <= 0)
-                            throw new NumberFormatException();
+                try {
+                    if (Integer.parseInt(nums[0]) <= 0 || Integer.parseInt(nums[1]) <= 0)
+                        throw new NumberFormatException();
 
-                    } catch (NumberFormatException e) {
-                        ConsoleHelper.writeMessage("Please specify valid data");
-                        continue;
-                    }
+                } catch (NumberFormatException e) {
+                    ConsoleHelper.writeMessage("Please specify valid data");
+                    continue;
+                }
                 return nums;
             }
             ConsoleHelper.writeMessage("Please specify valid data");
+        }
+    }
+
+    public static Operation askOperation() {
+        while (true) {
+            ConsoleHelper.writeMessage("Please choose an operation desired or type 'EXIT' for exiting");
+            ConsoleHelper.writeMessage("\t 1 - operation.INFO");
+            ConsoleHelper.writeMessage("\t 2 - operation.DEPOSIT");
+            ConsoleHelper.writeMessage("\t 3 - operation.WITHDRAW");
+            ConsoleHelper.writeMessage("\t 4 - operation.EXIT");
+            String numberOfOperation = ConsoleHelper.readString().trim();
+
+            if (numberOfOperation.length() == 1) {
+                try {
+                    int n = Integer.parseInt(numberOfOperation);
+                    return Operation.getAllowableOperationByOrdinal(n);
+                } catch (IllegalArgumentException e) {
+                    ConsoleHelper.writeMessage("Please specify valid data");
+                }
+            }
         }
     }
 }
