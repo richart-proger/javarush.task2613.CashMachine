@@ -18,7 +18,7 @@ public class CurrencyManipulator {
 
     public void addAmount(int denomination, int count){
         if (denominations.containsKey(denomination)){
-            denominations.put(denomination, denominations.get(denomination) + 1);
+            denominations.put(denomination, denominations.get(denomination) + count);
         }
         else {
             denominations.put(denomination, count);
@@ -32,5 +32,9 @@ public class CurrencyManipulator {
             amount += denomination * count;
         }
         return amount;
+    }
+
+    public boolean hasMoney(){
+        return !denominations.isEmpty();
     }
 }
