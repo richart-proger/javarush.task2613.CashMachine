@@ -16,8 +16,8 @@ public enum Operation {
                 return WITHDRAW;
             case 4:
                 return EXIT;
-                default:
-                    throw new IllegalArgumentException();
+            default:
+                throw new IllegalArgumentException();
         }
     }
 }
