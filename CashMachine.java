@@ -16,7 +16,7 @@ public class CashMachine {
                 CommandExecutor.execute(operation);
             } while (operation != Operation.EXIT);
         } catch (InterruptOperationException e) {
-            ConsoleHelper.writeMessage("Session completed. Thank you for visiting our ATM. Good luck!");
+            ConsoleHelper.writeMessage("Terminated. Thank you for visiting JavaRush cash machine. Good luck.");
         }
     }
 }

@@ -8,32 +8,31 @@ import java.util.ResourceBundle;
 
 public class LoginCommand implements Command{
     private ResourceBundle validCreditCards = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.verifiedCards");
+    private ResourceBundle res = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.login");
 
     @Override
     public void execute() throws InterruptOperationException {
-        ConsoleHelper.writeMessage("Logging in...");
+        ConsoleHelper.writeMessage(res.getString("before"));
 
         while (true){
-            ConsoleHelper.writeMessage("Please specify your credit card number " +
-                    "and pin code or type 'EXIT' for exiting");
+            ConsoleHelper.writeMessage(res.getString("specify.data"));
             String number = ConsoleHelper.readString();
             String pin = ConsoleHelper.readString();
 
             if (number == null || (number = number.trim()).length() != 12 ||
             pin == null || (pin = pin.trim()).length() != 4){
-                ConsoleHelper.writeMessage("Please specify valid credit card number" +
-                        " - 12 digits, pin code - 4 digits.");
+                ConsoleHelper.writeMessage(res.getString("try.again.with.details"));
             } else {
                 try {
                     if (validCreditCards.containsKey(number) && pin.equals(validCreditCards.getString(number))){
-                        ConsoleHelper.writeMessage(String.format("Credit card [%s] is verified successfully!", number));
+                        ConsoleHelper.writeMessage(String.format(res.getString("success.format"), number));
                         break;
                     } else {
-                        ConsoleHelper.writeMessage(String.format("Credit card [%s] is not verified.", number));
-                        ConsoleHelper.writeMessage("Please try again or type 'EXIT' for urgent exiting");
+                        ConsoleHelper.writeMessage(String.format(res.getString("not.verified.format"), number));
+                        ConsoleHelper.writeMessage(res.getString("try.again.or.exit"));
                     }
                 } catch (NumberFormatException e) {
-                    ConsoleHelper.writeMessage("Please specify valid credit card number - 12 digits, pin code - 4 digits.");
+                    ConsoleHelper.writeMessage(res.getString("try.again.with.details"));
                 }
             }
         }
